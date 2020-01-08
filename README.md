@@ -6,7 +6,7 @@ You may use this method to write and test your Hadoop program locally without co
 ## Requirements
 - [Intellij](https://www.jetbrains.com/idea/download)
 - JDK
-- Linux or Mac OS (recommended)
+- Linux or Mac OS (highly recommended)
 
 ## How to
 
@@ -46,7 +46,7 @@ Paste the following 2 blocks before the last `</project>` tag.
     <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
-        <version>3.2.0</version>
+        <version>3.2.1</version>
     </dependency>
 </dependencies>
 ```
@@ -82,7 +82,7 @@ The full `pom.xml` is below:
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
         </dependency>
     </dependencies>
 
@@ -187,7 +187,7 @@ You may encounter errors when running the Hadoop program on Windows:
 ```
 ERROR security.UserGroupInformation: PriviledgedActionException as ...
 ```
-This is because Intellij (and Java) does not have enough priviliege to create necessary folders and files to run. The solution is to run Intellij as Administrator. However, it is still recommended to run Hadoop program on Linux or Mac OS.
+This is because the Hadoop library tries to access some Unix specific path (e.g. /tmp), and tries to run some Unix specific functions (e.g. set folder permission to 0700). There are some possible solutions, for example, overriding Hadoop's configuration to set the correct temporary folder, or applying patches to Hadoop library to bypass Unix specific functions. However, it is still highly recommended to run Hadoop program on Linux or Mac OS.
 
 ## Sample Project
 See [WordCount](WordCount/).
