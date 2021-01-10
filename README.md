@@ -4,9 +4,9 @@ You may use this method to write and test your Hadoop program locally without co
 ](https://www.polarxiong.com/archives/Hadoop-Intellij%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F-%E6%97%A0%E9%9C%80%E6%90%AD%E8%BD%BDHadoop%E5%92%8CHDFS%E7%8E%AF%E5%A2%83.html), [How-to: Create an IntelliJ IDEA Project for Apache Hadoop](https://blog.cloudera.com/blog/2014/06/how-to-create-an-intellij-idea-project-for-apache-hadoop/) and [Developing Hadoop Mapreduce Application within Intellij IDEA on Windows 10](https://bigdataproblog.wordpress.com/2016/05/20/developing-hadoop-mapreduce-application-within-intellij-idea-on-windows-10/).
 
 ## Requirements
-- [Intellij](https://www.jetbrains.com/idea/download)
+- <a href="https://www.jetbrains.com/idea/download" target="_blank">IntelliJ IDEA</a>
 - JDK
-- Linux or Mac OS (highly recommended)
+- Linux or Mac OS
 
 ## How to
 
@@ -46,7 +46,7 @@ Paste the following 2 blocks before the last `</project>` tag.
     <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
-        <version>3.2.1</version>
+        <version>3.3.0</version>
     </dependency>
 </dependencies>
 ```
@@ -61,18 +61,15 @@ The full `pom.xml` is below:
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>gid</groupId>
-    <artifactId>aid</artifactId>
+    <groupId>cs242</groupId>
+    <artifactId>wordcount</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <repositories>
         <repository>
             <id>apache</id>
             <url>http://maven.apache.org</url>
         </repository>
     </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -85,7 +82,6 @@ The full `pom.xml` is below:
             <version>3.2.1</version>
         </dependency>
     </dependencies>
-
 </project>
 ```
 
@@ -94,7 +90,7 @@ The full `pom.xml` is below:
 Under `Project`&rarr;`src`&rarr;`main`&rarr;`java`, create a new `Java Class` named **WordCount**.
 ![new_class](images/new_class.png)
 
-Paste the Java code into **WordCount.java** (this is from the original Hadoop [MapReduce Tutorial](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)).
+Paste the Java code into **WordCount.java** (this is from the original Hadoop <a href="https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html" target="_blank">MapReduce Tutorial</a>).
 ```java
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -115,7 +111,7 @@ public class WordCount {
             extends Mapper<Object, Text, Text, IntWritable> {
 
         private final static IntWritable one = new IntWritable(1);
-        private Text word = new Text();
+        private final Text word = new Text();
 
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
@@ -181,6 +177,56 @@ Select `Run`&rarr;`Run 'WordCount'` to run the Hadoop program. If you re-run the
 Results are saved in *output*&rarr;*part-r-00000*.
 ![result](images/result.png)
 
+
+## Build Runnable JAR with Dependencies
+You can build a single jar file with your program and all necessary dependencies (e.g, Hadoop libraries) so you can transfer the jar file to another machine to run it.
+
+Add the following block to **pom.xml**. `build` block should be at the same level of `repositories` block and `dependencies` block.
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>8</source>
+                <target>8</target>
+            </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <!-- Path to your main class, include package path if needed -->
+                        <mainClass>WordCount</mainClass>
+                    </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+Then in a terminal, `cd` to the folder which contains the **pom.xml** file, execute the following command:
+```shell
+mvn package
+```
+This will build **wordcount-1.0-SNAPSHOT-jar-with-dependencies.jar** under **target** folder. To run your program, execute the following command:
+```shell
+java -jar target/wordcount-1.0-SNAPSHOT-jar-with-dependencies.jar input output
+```
 
 ## Issues on Windows
 You may encounter errors when running the Hadoop program on Windows:
