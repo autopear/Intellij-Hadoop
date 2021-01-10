@@ -4,7 +4,7 @@ You may use this method to write and test your Hadoop program locally without co
 ](https://www.polarxiong.com/archives/Hadoop-Intellij%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F-%E6%97%A0%E9%9C%80%E6%90%AD%E8%BD%BDHadoop%E5%92%8CHDFS%E7%8E%AF%E5%A2%83.html), [How-to: Create an IntelliJ IDEA Project for Apache Hadoop](https://blog.cloudera.com/blog/2014/06/how-to-create-an-intellij-idea-project-for-apache-hadoop/) and [Developing Hadoop Mapreduce Application within Intellij IDEA on Windows 10](https://bigdataproblog.wordpress.com/2016/05/20/developing-hadoop-mapreduce-application-within-intellij-idea-on-windows-10/).
 
 ## Requirements
-- <a href="https://www.jetbrains.com/idea/download" target="_blank">IntelliJ IDEA</a>
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/download)
 - JDK
 - Linux or Mac OS
 
@@ -79,7 +79,7 @@ The full `pom.xml` is below:
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>3.2.1</version>
+            <version>3.3.0</version>
         </dependency>
     </dependencies>
 </project>
@@ -90,7 +90,7 @@ The full `pom.xml` is below:
 Under `Project`&rarr;`src`&rarr;`main`&rarr;`java`, create a new `Java Class` named **WordCount**.
 ![new_class](images/new_class.png)
 
-Paste the Java code into **WordCount.java** (this is from the original Hadoop <a href="https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html" target="_blank">MapReduce Tutorial</a>).
+Paste the Java code into **WordCount.java** (this is from the original Hadoop [MapReduce Tutorial](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)).
 ```java
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -159,13 +159,13 @@ public class WordCount {
 ### Prepare to run
 The same **WordCount** program scans all text files in the folder defined by the first argument, and outout the frequencies of all words into a folder defined by the second argument.
 
-Create a folder named *input* under  the project's root folder (same as *src*), put some text files inside it.
+Create a folder named **input** under  the project's root folder (same as **src**), put some text files inside it.
 ![sample_text](images/sample_text.png)
 
 Then set the 2 program arguments. Select `Run`&rarr;`Edit Configurations`.
 ![edit_config](images/edit_config.png)
 
-Add a new `Application` configuration, set the `Name` be **WordCount**, set the `Main class` be **WordCount**, set `Program arguments` be **input output**. This allows the program to read from **input** folder and save the result to `output` folder. Do not create the output folder, as Hadoop will create the folder automatically. If the folder exists, Hadoop will raise exceptions.
+Add a new `Application` configuration, set the `Name` be **WordCount**, set the `Main class` be **WordCount**, set `Program arguments` be **input output**. This allows the program to read from **input** folder and save the result to **output** folder. Do not create the output folder, as Hadoop will create the folder automatically. If the folder exists, Hadoop will raise exceptions.
 ![new_app](images/new_app.png)
 ![config](images/config.png)
 
@@ -174,7 +174,7 @@ Add a new `Application` configuration, set the `Name` be **WordCount**, set the 
 Select `Run`&rarr;`Run 'WordCount'` to run the Hadoop program. If you re-run the program, delete the **output** folder before each run.
 ![run_app](images/run_app.png)
 
-Results are saved in *output*&rarr;*part-r-00000*.
+Results are saved in **output/part-r-00000**.
 ![result](images/result.png)
 
 
@@ -220,11 +220,11 @@ Add the following block to **pom.xml**. `build` block should be at the same leve
 ```
 
 Then in a terminal, `cd` to the folder which contains the **pom.xml** file, execute the following command:
-```shell
+```bash
 mvn package
 ```
 This will build **wordcount-1.0-SNAPSHOT-jar-with-dependencies.jar** under **target** folder. To run your program, execute the following command:
-```shell
+```bash
 java -jar target/wordcount-1.0-SNAPSHOT-jar-with-dependencies.jar input output
 ```
 
