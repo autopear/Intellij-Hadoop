@@ -40,13 +40,13 @@ Paste the following 2 blocks before the last `</project>` tag.
 <dependencies>
     <dependency>
         <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-core</artifactId>
-        <version>1.2.1</version>
+        <artifactId>hadoop-client</artifactId>
+        <version>3.3.1</version>
     </dependency>
     <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
     </dependency>
 </dependencies>
 ```
@@ -73,13 +73,13 @@ The full `pom.xml` is below:
     <dependencies>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>1.2.1</version>
+            <artifactId>hadoop-client</artifactId>
+            <version>3.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>3.3.0</version>
+            <version>3.3.1</version>
         </dependency>
     </dependencies>
 </project>
