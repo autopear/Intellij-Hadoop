@@ -1,3 +1,5 @@
+package edu.ucr.cs.merlin;
+
 import java.io.IOException;
 import java.util.StringTokenizer;
 
