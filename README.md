@@ -186,6 +186,12 @@ Hadoop may still not work properly on Windows. You can either install a Linux in
     This command was run using /Users/Merlin/hadoop-3.3.3/share/hadoop/common/hadoop-common-3.3.3.jar
     ```
 
+On macOS, if you see `(base)` in the beginning of every command line, you likely have [Conda](https://docs.conda.io/en/latest/) (Anaconda or miniconda) installed and have it [auto-activated](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#conda-init). This overrides your environment settings that you must do a `source` every time. You can disable its auto-activation by this command:
+
+```bash
+conda config --set auto_activate_base false
+```
+
 ### Windows (Environment)
 
 1. Search for `View advanced system settings` in the task bar (case insensitive) and open it.
