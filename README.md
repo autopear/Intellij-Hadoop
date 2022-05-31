@@ -70,11 +70,11 @@ Current latest version: `8u333` (`1.8.0_333`).
 Hadoop on Windows must be patched, otherwise it will not work at all. The latest patch available is for Hadoop 3.2.2, so you should use an older version of Hadoop.
 
 1. Download the binary of version `3.2.2` from [https://archive.apache.org/dist/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz](https://archive.apache.org/dist/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz).
-2. Use [7-Zip](https://www.7-zip.org/) to untar the downloaded *.tar.gz* file. Do not directly drag the folder to untar in 7-Zip.
+2. Use [7-Zip](https://www.7-zip.org/) to untar the downloaded *.tar.gz* file.
    1. Use 7-Zip to open the downloaded **hadoop-3.2.2.tar.gz**.
    2. Double click **hadoop-3.2.2.tar**, it takes some time to decompress.
       <p align="center"><img src="./images/7z-hadoop-tar.png" style="width:603px;"/></p>
-   3. Select the folder **hadoop-3.2.2**, then click **Extract**.
+   3. Select the folder **hadoop-3.2.2**, then click **Extract**. Do not directly drag the folder to untar.
       <p align="center"><img src="./images/7z-hadoop-dir.png" style="width:603px;"/></p>
    4. In the dialog, change **Copy to** path to `C:\`, then **OK**.
       <p align="center"><img src="./images/7z-hadoop-untar.png" style="width:449px;"/></p>
@@ -221,7 +221,7 @@ Hadoop may still not work properly on Windows. You can either install a Linux in
 
     <p align="center"><img src="./images/win-env-path.png" style="width:401px;"/></p>
 
-9. Click **OK** multiple times until the **System Properties** dialog (step 2) is closed.
+9. Click **OK** multiple times until the **System Properties** dialog (step 2) is closed. Then restart Command Promot or Windows Terminal.
 
 10. Test `*_HOME`, run
     - Command Promot
