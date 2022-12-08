@@ -116,13 +116,18 @@ Hadoop may still not work properly on Windows. You can either install a Linux in
    # Use this line below for Linux
    export JAVA_HOME="/home/$LOGNAME/jdk1.8.0_333"
    # Use this line below for macOS
-   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_333.jdk/Contents/Home"
+   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_352.jdk/Contents/H$"
+   export JAVA_HOME=$(/usr/libexec/java_home)
 
-   # Copy the following lines
+   # Copy the following lines for Linux
    export MAVEN_HOME="/home/$LOGNAME/apache-maven-3.8.5"
    export HADOOP_HOME="/home/$LOGNAME/hadoop-3.3.3"
+   # Copy the following lines for macOS
+   export MAVEN_HOME="/Users/$LOGNAME/apache-maven-3.8.5"
+   export HADOOP_HOME="/Users/$LOGNAME/hadoop-3.3.3"
 
    export PATH=$HADOOP_HOME/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH
+   
    ```
 
 3. Restart the terminal, or run
